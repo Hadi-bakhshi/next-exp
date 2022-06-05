@@ -1,6 +1,14 @@
 import { Box, Button, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { NextPage } from "next";
 import Link from "next/link";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { logIn } from "../feature/authentication/authSlice";
+import { useAppDispatch } from "../feature/store";
+interface IUser {
+  username: string;
+  password: string;
+}
 
 const CustomBg = styled(Box)(({ theme }) => ({
   width: "30%",
@@ -13,7 +21,30 @@ const CustomBg = styled(Box)(({ theme }) => ({
   boxShadow: "3px 13px 13px -10px rgba(0,0,0,0.6)",
 })) as typeof Box;
 
-const login = () => {
+const LoginPage: NextPage = () => {
+  const [userInput, setUserInput] = useState<IUser>({
+    username: "",
+    password: "",
+  });
+
+  const dispatch = useAppDispatch();
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setUserInput((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const submitHandler = (e: FormEvent) => {
+    e.preventDefault();
+    const { username, password } = userInput;
+    dispatch(logIn({ password, username }));
+    setUserInput({
+      username: "",
+      password: "",
+    });
+  };
+
   return (
     <div
       style={{
@@ -29,6 +60,7 @@ const login = () => {
         <Box
           component="form"
           noValidate
+          onSubmit={submitHandler}
           sx={{
             width: "70%",
             display: "flex",
@@ -36,14 +68,30 @@ const login = () => {
             gap: 3,
           }}
         >
-          <TextField id="username" label="نام کاربری" variant="outlined" />
-          <TextField id="password" label="رمز عبور" variant="outlined" />
-          <Button variant="contained">ورود</Button>
-          <Link href='/'>صفحه اصلی</Link>
+          <TextField
+            id="username"
+            label="نام کاربری"
+            variant="outlined"
+            name="username"
+            value={userInput.username}
+            onChange={changeHandler}
+          />
+          <TextField
+            id="password"
+            label="رمز عبور"
+            variant="outlined"
+            name="password"
+            value={userInput.password}
+            onChange={changeHandler}
+          />
+          <Button type="submit" variant="contained">
+            ورود
+          </Button>
+          <Link href="/">صفحه اصلی</Link>
         </Box>
       </CustomBg>
     </div>
   );
 };
 
-export default login;
+export default LoginPage;

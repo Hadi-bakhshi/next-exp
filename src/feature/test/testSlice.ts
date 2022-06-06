@@ -1,40 +1,38 @@
-import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  AnyAction,
+  createAsyncThunk,
+  createSlice,
+  PayloadAction,
+} from "@reduxjs/toolkit";
 import http from "../../services/axiosConfig/interceptors";
 import config from "../../services/config";
 
-import { RootState } from "../store";
+import { AppState } from "../store";
 
 interface TestState {
-    id: number;
-    title: string;
-    body: string;
+  id: number;
+  title: string;
+  body: string;
 }
 
-
-
-
 export const initialState: TestState = {
-    id: 1,
-    title: "",
-    body: "",
+  id: 1,
+  title: "",
+  body: "",
 };
-
-
 
 export const testSlice = createSlice({
   name: "test",
   initialState,
   reducers: {
-    addPost: (state: typeof initialState, action:any) => {
-        state.body = action.payload.body;
-        state.title = action.payload.title
-
-
+    addPost: (state: typeof initialState, action: any) => {
+      state.body = action.payload.body;
+      state.title = action.payload.title;
     },
   },
-  extraReducers: {}
+  extraReducers: {},
 });
 
 export const { addPost } = testSlice.actions;
 export default testSlice.reducer;
-export const testState = (state: RootState) => state.test;
+export const testState = (state: AppState) => state.test;

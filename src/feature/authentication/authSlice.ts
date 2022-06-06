@@ -3,7 +3,7 @@ import http from "../../services/axiosConfig/interceptors";
 import config from "../../services/config";
 
 import { AuthState, LoginData, User } from "../../types/redux/index";
-import { RootState } from "../store";
+import { AppState } from "../store";
 
 export const initialState: AuthState = Object.freeze({
   isAuthenticated: false,
@@ -53,4 +53,4 @@ export const authSlice = createSlice({
 
 export const { clearAuthError } = authSlice.actions;
 export default authSlice.reducer;
-export const authState = (state: RootState) => state.auth;
+export const authState = (state: AppState) => state.auth;

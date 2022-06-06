@@ -27,20 +27,19 @@ export const subjectSlice = createSlice({
 const makeStore = () =>
   configureStore({
     reducer: {
-      [subjectSlice.name]: subjectSlice.reducer,
+      subject: subjectSlice.reducer,
       auth: authSlice,
       test: testSlice,
     },
     devTools: true,
   });
 
+  export const  subjectState = (state: AppState) => state.subject;
 export type AppStore = ReturnType<typeof makeStore>;
 export type AppDispatch = AppStore["dispatch"];
 export type AppState = ReturnType<AppStore["getState"]>;
 export type AppThunk = ThunkAction<void, AppState, null, Action<string>>;
 // export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppState, unknown, Action>;
-
 export const wrapper = createWrapper<AppStore>(makeStore);
-
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;

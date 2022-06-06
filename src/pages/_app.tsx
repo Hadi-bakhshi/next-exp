@@ -8,7 +8,8 @@ import { prefixer } from "stylis";
 import createCache from "@emotion/cache";
 import rtlPlugin from "stylis-plugin-rtl";
 import { Provider } from "react-redux";
-import { store } from "../feature/store";
+import { createWrapper } from "next-redux-wrapper";
+import { wrapper } from "../feature/store";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const cacheRtl = createCache({
@@ -17,15 +18,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   });
 
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <CacheProvider value={cacheRtl}>
-          <CssBaseline />
-          <Component {...pageProps} />
-        </CacheProvider>
-      </ThemeProvider>
-    </Provider>
+    <ThemeProvider theme={theme}>
+      <CacheProvider value={cacheRtl}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </CacheProvider>
+    </ThemeProvider>
   );
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);

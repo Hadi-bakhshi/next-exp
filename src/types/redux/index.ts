@@ -11,11 +11,14 @@ export interface LoginData {
 // User
 //==============================================================================
 export interface User {
-  id?: string;
-  name?: string;
-  email?: string;
-  avatar?: string;
-  role?: Role;
+  data?: {
+    id?: string;
+    name?: string;
+    token?: string;
+    userName?: string;
+    roleId?: number;
+    role?: Role;
+  };
 }
 //==============================================================================
 // State

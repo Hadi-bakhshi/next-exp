@@ -2,9 +2,10 @@ import { Box, Button, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { NextPage } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { logIn } from "../feature/authentication/authSlice";
-import { useAppDispatch } from "../feature/store";
+import { authState, logIn } from "../feature/authentication/authSlice";
+import { useAppDispatch, useAppSelector } from "../feature/store";
 interface IUser {
   username: string;
   password: string;
@@ -26,8 +27,17 @@ const LoginPage: NextPage = () => {
     username: "",
     password: "",
   });
-
+  const router = useRouter();
   const dispatch = useAppDispatch();
+  const auth = useAppSelector(authState);
+
+
+  useEffect(()=> {
+   if(auth.user.data) {
+    router.push('/test')
+   }
+  },[auth])
+
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setUserInput((prevState) => ({
       ...prevState,

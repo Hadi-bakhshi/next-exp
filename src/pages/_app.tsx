@@ -10,12 +10,19 @@ import rtlPlugin from "stylis-plugin-rtl";
 import { Provider } from "react-redux";
 import { createWrapper } from "next-redux-wrapper";
 import { wrapper } from "../feature/store";
+import { useEffect } from "react";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const cacheRtl = createCache({
     key: "muirtl",
     stylisPlugins: [prefixer, rtlPlugin],
   });
+  useEffect(() => {
+    const jssStyles = document.querySelector("#jss-server-side");
+    if (jssStyles?.parentElement) {
+      jssStyles.parentElement.removeChild(jssStyles);
+    }
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>

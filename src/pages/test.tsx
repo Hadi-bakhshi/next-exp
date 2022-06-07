@@ -1,37 +1,34 @@
 import React, { useEffect } from "react";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import axios from "axios";
 import { wrapper } from "../feature/store";
 import { addPost } from "../feature/test/testSlice";
 import Link from "next/link";
+import { useAppDispatch } from "../hooks/rtk";
 
+const TestPage: NextPage = ({ data }) => {
+  const dispatch = useAppDispatch();
 
-const TestPage: NextPage = () => {
+  useEffect(() => {
+    dispatch(addPost({ id: data.id, title: data.title, body: data.body }));
+  }, [data]);
   return (
     <div>
       <Link href="/">Go home</Link>
-      <br/>
+      <br />
       <Link href="/test2">Go test2</Link>
     </div>
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async () => {
-    const { data } = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts/1"
-    );
-    store.dispatch(addPost({id: 2 ,title: data.title, body: data.body }));
-    return {
-      props: {},
-    };
-  }
-);
+export async function getServerSideProps() {
+  const { data } = await axios.get(
+    "https://jsonplaceholder.typicode.com/posts/1"
+  );
 
-// TestPage.getInitialProps = wrapper.getInitialPageProps(
-//   (store) => async () => {
-//     const {data} = await axios.get("https://jsonplaceholder.typicode.com/posts/1");
-//     store.dispatch(addPost({id: data.id ,title: data.title, body: data.body}))
-//   }
-// )
+  return {
+    props: { data }, // will be passed to the page component as props
+  };
+}
+
 export default TestPage;

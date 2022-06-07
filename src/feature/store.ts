@@ -8,13 +8,14 @@ const combinedReducer = combineReducers({
   test: testReducer,
 })
 
-const myReducer = (state , action:AnyAction) => {
+const myReducer = (state, action:AnyAction) => {
   if(action.type === HYDRATE) {
     const nextState = {
       ...state,
       ...action.payload
     }
     console.log(action.payload)
+    console.log(state)
     return nextState;
   } else {
     return combinedReducer(state, action)

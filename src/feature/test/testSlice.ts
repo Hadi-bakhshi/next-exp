@@ -26,13 +26,18 @@ export const testSlice = createSlice({
   initialState,
   reducers: {
     addPost: (state: typeof initialState, action: any) => {
+      state.id = action.payload.id;
       state.body = action.payload.body;
+      state.title = action.payload.title;
+    },
+    addPost2: (state: typeof initialState, action: any) => {
+      state.id = action.payload.id;
       state.title = action.payload.title;
     },
   },
   extraReducers: {},
 });
 
-export const { addPost } = testSlice.actions;
+export const { addPost, addPost2 } = testSlice.actions;
 export default testSlice.reducer;
 export const testState = (state: AppState) => state.test;

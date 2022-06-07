@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { authState, logIn } from "../feature/authentication/authSlice";
-import { useAppDispatch, useAppSelector } from "../feature/store";
+import { useAppDispatch, useAppSelector } from "../hooks/rtk";
+
 interface IUser {
   username: string;
   password: string;

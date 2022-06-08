@@ -1,4 +1,10 @@
-import { Action, configureStore, combineReducers, ThunkAction, AnyAction } from "@reduxjs/toolkit";
+import {
+  Action,
+  configureStore,
+  combineReducers,
+  ThunkAction,
+  AnyAction,
+} from "@reduxjs/toolkit";
 import { createWrapper, HYDRATE } from "next-redux-wrapper";
 import authReducer from "./authentication/authSlice";
 import testReducer from "./test/testSlice";
@@ -6,26 +12,29 @@ import testReducer from "./test/testSlice";
 const combinedReducer = combineReducers({
   auth: authReducer,
   test: testReducer,
-})
+});
 
-const myReducer = (state, action:AnyAction) => {
-  if(action.type === HYDRATE) {
+const myReducer = (
+  state: ReturnType<typeof combinedReducer | any>,
+  action: AnyAction
+) => {
+  if (action.type === HYDRATE) {
     const nextState = {
       ...state,
-      ...action.payload
-    }
-    console.log(action.payload)
-    console.log(state)
+      ...action.payload,
+    };
+    console.log(action);
+    console.log(state);
     return nextState;
   } else {
-    return combinedReducer(state, action)
+    return combinedReducer(state, action);
   }
-}
+};
 
-
-export const makeStore = () => configureStore({
-  reducer: myReducer
-})
+export const makeStore = () =>
+  configureStore({
+    reducer: myReducer,
+  });
 
 export type AppStore = ReturnType<typeof makeStore>;
 export type AppDispatch = AppStore["dispatch"];

@@ -6,11 +6,22 @@ import { wrapper } from "../feature/store";
 import { addPost2 } from "../feature/test/testSlice";
 import { useAppDispatch } from "../hooks/rtk";
 
-const TestPage2: NextPage = ({ data }) => {
+interface Iprops {
+  data?:
+    | {
+        id: number;
+        title: string;
+      }
+    | undefined;
+}
+
+const TestPage2: NextPage<Iprops> = ({ data }) => {
   const dispatch = useAppDispatch();
+
   useEffect(() => {
-    dispatch(addPost2({ id: data.id, title: data.title }));
+    dispatch(addPost2({ id: data?.id, title: data?.title }));
   }, [data]);
+
   return (
     <div>
       <Link href="/test">Go to test1</Link>

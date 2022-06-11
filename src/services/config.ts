@@ -1,6 +1,6 @@
 const config = {
     env: process.env.NODE_ENV,
-    baseURL: "http://192.168.4.208:8000/api/v1",
+    baseURL: "https://admin.behinekavan.com:6001/api/v1",
     apiHeaders: {
       "Content-type": "application/json",
     },

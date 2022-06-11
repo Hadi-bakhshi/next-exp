@@ -8,7 +8,6 @@ const http = axios.create({
 });
 
 const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
-  config.headers = { Authorization: `Bearer ${localStorage.getItem("token")}` };
   console.log(config)
   return config;
 };

@@ -32,12 +32,11 @@ const LoginPage: NextPage = () => {
   const dispatch = useAppDispatch();
   const auth = useAppSelector(authState);
 
-
-  useEffect(()=> {
-   if(auth.user.data) {
-    router.push('/test')
-   }
-  },[auth])
+  useEffect(() => {
+    if (auth.user.data) {
+      router.push("/test");
+    }
+  }, [auth]);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setUserInput((prevState) => ({

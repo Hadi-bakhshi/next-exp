@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
-import { GetServerSideProps, NextPage } from "next";
+import { NextPage } from "next";
 import axios from "axios";
-import { wrapper } from "../feature/store";
 import { addPost } from "../feature/test/testSlice";
 import Link from "next/link";
 import { useAppDispatch } from "../hooks/rtk";
 
 const TestPage: NextPage = ({ data }) => {
   const dispatch = useAppDispatch();
-
   useEffect(() => {
     dispatch(addPost({ id: data.id, title: data.title, body: data.body }));
   }, [data]);

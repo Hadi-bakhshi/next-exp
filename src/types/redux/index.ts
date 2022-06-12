@@ -6,6 +6,7 @@ import { Role } from "../Roles/role";
 export interface LoginData {
   username: string;
   password: string;
+  csrf?: string
 }
 //==============================================================================
 // User

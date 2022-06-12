@@ -14,10 +14,10 @@ export const initialState: AuthState = Object.freeze({
 
 export const logIn = createAsyncThunk(
   "auth/logIn",
-  async ({ username, password }: LoginData, thunkAPI) => {
+  async ({ username, password, csrf }: LoginData, thunkAPI) => {
     try {
       const url = config.endpoints.auth.login;
-      const { data } = await http.post(url, { username, password });
+      const { data } = await http.post(url, { username, password, csrf });
       return data;
     } catch (err: any) {
       return thunkAPI.rejectWithValue(err.response.data.message);

@@ -1,12 +1,12 @@
 const config = {
     env: process.env.NODE_ENV,
-    baseURL: "https://admin.behinekavan.com:6001/api/v1",
+    baseURL: "http://localhost:3000",
     apiHeaders: {
       "Content-type": "application/json",
     },
     endpoints: {
       auth: {
-        login: "Users/token",
+        login: "/api/auth/signin/:provider",
         createAccount: "/users/create-account",
         logout: "/users/logout",
         me: "/users",

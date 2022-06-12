@@ -1,6 +1,7 @@
 import { Box, Button, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { NextPage } from "next";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
@@ -49,7 +50,9 @@ const LoginPage: NextPage = () => {
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
     const { username, password } = userInput;
-    dispatch(logIn({ password, username }));
+    const csrf = "d01e469ceee9f6ea5ceaa550553f581aac0f954b1d7b48fb683c9addbe26ae80";
+    // dispatch(logIn({ password, username,csrf  }));
+    signIn(username, password)
     setUserInput({
       username: "",
       password: "",

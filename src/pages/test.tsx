@@ -5,11 +5,11 @@ import { addPost } from "../feature/test/testSlice";
 import Link from "next/link";
 import { useAppDispatch } from "../hooks/rtk";
 
-const TestPage: NextPage = ({ data }) => {
+const TestPage: NextPage = ({}) => {
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(addPost({ id: data.id, title: data.title, body: data.body }));
-  }, [data]);
+  // useEffect(() => {
+  //   dispatch(addPost({ id: data.id, title: data.title, body: data.body }));
+  // }, [data]);
   return (
     <div>
       <Link href="/">Go home</Link>

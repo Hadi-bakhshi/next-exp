@@ -4,7 +4,6 @@ import config from "../../services/config";
 
 import { AuthState, LoginData, User } from "../../types/redux/index";
 import { AppState } from "../store";
-
 export const initialState: AuthState = Object.freeze({
   isAuthenticated: false,
   error: "",
@@ -14,11 +13,12 @@ export const initialState: AuthState = Object.freeze({
 
 export const logIn = createAsyncThunk(
   "auth/logIn",
-  async ({ username, password, csrf }: LoginData, thunkAPI) => {
+  async ({ username, password }: LoginData, thunkAPI) => {
     try {
       const url = config.endpoints.auth.login;
-      const { data } = await http.post(url, { username, password, csrf });
+      const { data } = await http.post(url, { username, password });
       return data;
+      
     } catch (err: any) {
       return thunkAPI.rejectWithValue(err.response.data.message);
     }

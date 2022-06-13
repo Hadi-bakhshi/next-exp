@@ -33,12 +33,14 @@ const LoginPage: NextPage = () => {
   const dispatch = useAppDispatch();
   const auth = useAppSelector(authState);
 
-
   useEffect(()=> {
-   if(auth.user.data) {
-    router.push('/test')
-   }
-  },[auth])
+    if(auth.user.role){
+      const userRole = auth.user.role
+      router.push(`${userRole}`)
+    } else {
+      console.log('khabari nis');
+    }
+   },[auth])
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setUserInput((prevState) => ({
@@ -50,9 +52,8 @@ const LoginPage: NextPage = () => {
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
     const { username, password } = userInput;
-    const csrf = "d01e469ceee9f6ea5ceaa550553f581aac0f954b1d7b48fb683c9addbe26ae80";
-    // dispatch(logIn({ password, username,csrf  }));
-    signIn(username, password)
+    dispatch(logIn({ password, username }));
+
     setUserInput({
       username: "",
       password: "",

@@ -7,14 +7,14 @@ import Link from "next/link";
 import { useAppDispatch } from "../hooks/rtk";
 import { useSession } from "next-auth/react";
 
-const TestPage: NextPage = ({ data }) => {
-  const dispatch = useAppDispatch();
-  const mydata = useSession()
-  console.log(mydata)
+const TestPage: NextPage = () => {
+  // const dispatch = useAppDispatch();
+  // const mydata = useSession()
+  // console.log(mydata)
 
-  useEffect(() => {
-    dispatch(addPost({ id: data.id, title: data.title, body: data.body }));
-  }, [data]);
+  // useEffect(() => {
+  //   dispatch(addPost({ id: data.id, title: data.title, body: data.body }));
+  // }, [data]);
   return (
     <div>
       <Link href="/">Go home</Link>

@@ -2,6 +2,8 @@ import NextAuth from "next-auth";
 import jwt from "jsonwebtoken";
 import CredentialProvider from "next-auth/providers/credentials";
 import axios from "axios";
+import * as mData from '../../../../db/data.json'
+
 
 export default NextAuth({
   providers: [
@@ -12,6 +14,8 @@ export default NextAuth({
         password: { label: "password", type: "password" },
       },
       async authorize(credentials, req) {
+
+
         const { data } = await axios.post(
           "https://admin.behinekavan.com:6001/api/v1/Users/token",
           { username: credentials?.username, password: credentials?.password }

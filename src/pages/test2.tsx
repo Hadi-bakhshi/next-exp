@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import { wrapper } from "../feature/store";
 import { addPost2 } from "../feature/test/testSlice";
 import { useAppDispatch } from "../hooks/rtk";
-
+import * as myData from '../../db/data.json'
 interface Iprops {
   data?:
     | {
@@ -25,6 +25,7 @@ const TestPage2: NextPage<Iprops> = ({ data }) => {
   return (
     <div>
       <Link href="/test">Go to test1</Link>
+      <button >Show the data</button>
     </div>
   );
 };

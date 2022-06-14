@@ -36,7 +36,8 @@ const LoginPage: NextPage = () => {
   useEffect(()=> {
     if(auth.user.role){
       const userRole = auth.user.role
-      router.push(`${userRole}`)
+      // router.push(`${userRole}`)
+      router.push('/')
     } else {
       console.log('khabari nis');
     }

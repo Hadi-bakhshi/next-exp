@@ -1,20 +1,15 @@
 import React, { useEffect } from "react";
 import { GetServerSideProps, NextPage } from "next";
 import axios from "axios";
-import { wrapper } from "../feature/store";
-import { addPost } from "../feature/test/testSlice";
 import Link from "next/link";
-import { useAppDispatch } from "../hooks/rtk";
-import { useSession } from "next-auth/react";
+import { useAppDispatch, useAppSelector } from "../hooks/rtk";
+import { authState } from "../feature/authentication/authSlice";
+
 
 const TestPage: NextPage = () => {
-  // const dispatch = useAppDispatch();
-  // const mydata = useSession()
-  // console.log(mydata)
-
-  // useEffect(() => {
-  //   dispatch(addPost({ id: data.id, title: data.title, body: data.body }));
-  // }, [data]);
+  const appAuth = useAppSelector(authState)
+  useEffect(()=> {
+  },[])
   return (
     <div>
       <Link href="/">Go home</Link>
@@ -24,14 +19,5 @@ const TestPage: NextPage = () => {
   );
 };
 
-export async function getServerSideProps() {
-  const { data } = await axios.get(
-    "https://jsonplaceholder.typicode.com/posts/1"
-  );
-
-  return {
-    props: { data }, // will be passed to the page component as props
-  };
-}
 
 export default TestPage;

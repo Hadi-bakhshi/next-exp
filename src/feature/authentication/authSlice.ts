@@ -10,6 +10,7 @@ export const initialState: AuthState = Object.freeze({
   status: "idle",
   user: {},
 });
+  
 
 export const logIn = createAsyncThunk(
   "auth/logIn",

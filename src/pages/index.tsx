@@ -6,7 +6,11 @@ const Home: NextPage = () => {
   return (
     <div>
      <h1>Hello</h1>
-     <Link href='/test'>Go to test</Link>
+     <Link href='/admin'>Go to admin</Link>
+     <br />
+     <Link href='/admin/dashboard'>Go to dashboard</Link>
+     <br />
+     <Link href='/client'>Go to client</Link>
     </div>
   )
 }

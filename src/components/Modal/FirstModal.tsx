@@ -11,15 +11,20 @@ import {
   FormControlLabel,
   FormGroup,
   FormHelperText,
+  FormLabel,
+  Radio,
+  RadioGroup,
 } from "@mui/material";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "30%",
-  height: "30%",
+  width: "300px%",
+  height: "300px%",
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
@@ -28,22 +33,27 @@ const style = {
 
 const FirstModal = () => {
   const [open, setOpen] = React.useState(false);
-  const [state, setState] = React.useState({
-    all: false,
-    hr: false,
-    carage: false,
-  });
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({
-      ...state,
-      [event.target.name]: event.target.checked,
-    });
-  };
-
+  const [radioValue, setRadioValue] = React.useState("");
+  const [error, setError] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const { all, hr, carage } = state;
-  const error = [all, hr, carage].filter((v) => v).length !== 1;
+
+  const router = useRouter();
+
+  const radio_change_handler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRadioValue((event.target as HTMLInputElement).value);
+    setError(false);
+  };
+
+  const continue_btn_handler = () => {
+    if (radioValue === "") {
+      setError(true);
+      toast.error("لطفا یکی را انتخاب کنید");
+    } else {
+      router.push("/test2");
+    }
+  };
+
   return (
     <div>
       <Button
@@ -68,27 +78,61 @@ const FirstModal = () => {
         }}
       >
         <Fade in={open}>
-          <Box sx={style}>
-            <Typography id="transition-modal-title" variant="h6" component="h2">
-              لطفا نوع بازرسی را انتخاب کنید:
-            </Typography>
-            <FormControl required error={error} component="fieldset">
-              <FormGroup>
+          <Box
+            sx={{
+              position: "absolute" as "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: {xs: "300px",sm:"30%"},
+              height: {xs: "300px",sm:"30%"},
+              bgcolor: "background.paper",
+              boxShadow: 24,
+              p: 4,
+              borderRadius: 2,
+            }}
+          >
+            <FormControl>
+              <FormLabel id="demo-radio-buttons-group-label">
+                {" "}
+                <Typography
+                  id="transition-modal-title"
+                  variant="h6"
+                  component="h2"
+                >
+                  لطفا نوع بازرسی را انتخاب کنید:
+                </Typography>
+              </FormLabel>
+              <RadioGroup
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue="all"
+                name="radio-buttons-group"
+                value={radioValue}
+                onChange={radio_change_handler}
+              >
                 <FormControlLabel
-                  control={<Checkbox onChange={handleChange} name="carage" />}
+                  value="garage"
+                  control={<Radio />}
                   label="تعمیرگاه ها و تجهیزات"
                 />
                 <FormControlLabel
-                  control={<Checkbox onChange={handleChange} name="hr" />}
-                  label="نیروی انسانی"
+                  value="hr"
+                  control={<Radio />}
+                  label="نیروی انسانی "
                 />
-                <FormControlLabel
-                  control={<Checkbox onChange={handleChange} name="all" />}
-                  label="همه"
-                />
-              </FormGroup>
-              {error && <FormHelperText>لطفا یکی را انتخاب کنید</FormHelperText>}
+                <FormControlLabel value="all" control={<Radio />} label="همه" />
+              </RadioGroup>
             </FormControl>
+            <Box>
+              <Button
+                onClick={continue_btn_handler}
+                size="medium"
+                variant="contained"
+                sx={{ postition: "absolute", bottom: -10, left: 0, right: 0 }}
+              >
+                تایید و ادامه
+              </Button>
+            </Box>
           </Box>
         </Fade>
       </Modal>

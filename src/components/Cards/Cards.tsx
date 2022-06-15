@@ -11,7 +11,7 @@ import FirstModal from "../Modal/FirstModal";
 
 export default function Cards() {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 340 }}>
       <CardMedia
         component="img"
         height="150"

@@ -14,6 +14,9 @@ import { authState } from "../feature/authentication/authSlice";
 import { useRouter } from "next/router";
 import AccessDeniedPage from "./accessdeny";
 import jwt from "jsonwebtoken";
+import { ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
+
 // import { SessionProvider } from "next-auth/react";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -51,14 +54,23 @@ function MyApp({ Component, pageProps }: AppProps) {
     console.log(isUserAllowed);
   }
 
-
-  
-
   const ComponentToRender = isUserAllowed ? Component : AccessDeniedPage;
   return (
     <ThemeProvider theme={theme}>
       <CacheProvider value={cacheRtl}>
         <CssBaseline />
+        <ToastContainer
+          className="impct-toast"
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={true}
+          draggable={true}
+          pauseOnHover
+          transition={Slide}
+        />
         <ComponentToRender {...pageProps} />
       </CacheProvider>
     </ThemeProvider>

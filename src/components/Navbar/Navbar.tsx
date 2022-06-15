@@ -11,10 +11,12 @@ import Sidebar from "../Sidebar/Sidebar";
 
 const Navbar = () => {
   return (
-    <Box sx={{ flexGrow: 1, marginBottom:2 }}>
-      <AppBar position="static" sx={{ backgroundColor: "#045D5D" }}>
+      <AppBar
+        position="sticky"
+        sx={{ backgroundColor: "#045D5D",}}
+      >
         <Toolbar>
-            <Sidebar/>
+          <Sidebar />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             خوش آمدید
           </Typography>
@@ -23,7 +25,6 @@ const Navbar = () => {
           </Button>
         </Toolbar>
       </AppBar>
-    </Box>
   );
 };
 

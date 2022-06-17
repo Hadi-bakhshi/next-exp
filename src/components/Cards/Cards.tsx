@@ -9,7 +9,14 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { Box } from "@mui/material";
 import FirstModal from "../Modal/FirstModal";
 
-export default function Cards() {
+interface ICardProps {
+  id?: number;
+  title: string;
+  description: string;
+  time: number;
+}
+
+export default function Cards({id, title, description, time} : ICardProps) {
   return (
     <Card sx={{ maxWidth: 340 }}>
       <CardMedia
@@ -20,18 +27,16 @@ export default function Cards() {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          نمایندگی 114 سایپا
+         {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-          استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
-          ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز،
+        {description}
         </Typography>
       </CardContent>
       <Box sx={{ display: "flex", gap: 1, alignItems: "center", pl: 1, pb: 1 }}>
         <AccessTimeIcon color="action" fontSize="small" />
         <Typography variant="subtitle2" color={"gray"}>
-          5 ساعت تا اتمام زمان باقی مانده
+          {time} ساعت تا اتمام زمان باقی مانده
         </Typography>
       </Box>
       <CardActions>

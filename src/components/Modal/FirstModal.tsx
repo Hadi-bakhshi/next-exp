@@ -17,19 +17,20 @@ import {
 } from "@mui/material";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import Divider from "@mui/material/Divider";
 
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "300px%",
-  height: "300px%",
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  p: 4,
-  borderRadius: 2,
-};
+// const style = {
+//   position: "absolute" as "absolute",
+//   top: "50%",
+//   left: "50%",
+//   transform: "translate(-50%, -50%)",
+//   width: "300px%",
+//   height: "300px%",
+//   bgcolor: "background.paper",
+//   boxShadow: 24,
+//   p: 4,
+//   borderRadius: 2,
+// };
 
 const FirstModal = () => {
   const [open, setOpen] = React.useState(false);
@@ -85,7 +86,7 @@ const FirstModal = () => {
               left: "50%",
               transform: "translate(-50%, -50%)",
               width: { xs: "300px", sm: "40%", md: "50%" },
-              height: { xs: "300px", sm: "40%", md: "50%" },
+              height: { xs: "50%", sm: "60%", md: "50%" },
               bgcolor: "background.paper",
               boxShadow: 24,
               p: 4,
@@ -128,10 +129,40 @@ const FirstModal = () => {
                 onClick={continue_btn_handler}
                 size="medium"
                 variant="contained"
-                sx={{ postition: "absolute", bottom: -10, left: 0, right: 0 }}
+                sx={{ marginBottom: "10px" }}
               >
                 تایید و ادامه
               </Button>
+              <Divider />
+
+              <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label">
+                <Typography color={"GrayText"} variant="h6" component="h2">
+                علت عدم بازرسی را ذکر کنید:
+              </Typography>
+                </FormLabel>
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  defaultValue="all"
+                  name="radio-buttons-group"
+                >
+                  <FormControlLabel
+                    value=""
+                    control={<Radio />}
+                    label="تعطیل بودن مجموعه"
+                  />
+                  <FormControlLabel
+                    value="male"
+                    control={<Radio />}
+                    label="عدم همکاری"
+                  />
+                  <FormControlLabel
+                    value="other"
+                    control={<Radio />}
+                    label="سایر موارد با ذکر دلیل"
+                  />
+                </RadioGroup>
+              </FormControl>
             </Box>
           </Box>
         </Fade>

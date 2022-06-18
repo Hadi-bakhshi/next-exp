@@ -41,7 +41,7 @@ export default function Cards({id, title, description, time} : ICardProps) {
       </Box>
       <CardActions>
         <FirstModal />
-        <Button size="small">مشاهده اطلاعات ثبت شده</Button>
+        <Button size="small" sx={{marginLeft:"20px"}}>مشاهده اطلاعات ثبت شده</Button>
       </CardActions>
     </Card>
   );

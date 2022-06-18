@@ -8,6 +8,7 @@ const http = axios.create({
 });
 
 const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
+  config.headers = { Authorization: ` ${localStorage.getItem("token")}` };
   console.log(config)
   return config;
 };
@@ -22,16 +23,16 @@ const onResponse = (response: AxiosResponse): AxiosResponse => {
 };
 
 const onResponseError = (error: AxiosError): Promise<AxiosError> => {
-  if (error.response?.status === 401) {
-    window.location.replace("http://localhost:3000/login");
-    sessionStorage.clear();
-    localStorage.clear();
-  }
-  if (error.response?.data?.statusCode === 401) {
-    window.location.replace("http://localhost:3000/login");
-    sessionStorage.clear();
-    localStorage.clear();
-  }
+  // if (error.response?.status === 401) {
+  //   window.location.replace("http://localhost:3000/login");
+  //   sessionStorage.clear();
+  //   localStorage.clear();
+  // }
+  // if (error.response?.data?.statusCode === 401) {
+  //   window.location.replace("http://localhost:3000/login");
+  //   sessionStorage.clear();
+  //   localStorage.clear();
+  // }
   if (error.response?.data?.message) {
     console.log(error.response?.data?.message);
   } else {

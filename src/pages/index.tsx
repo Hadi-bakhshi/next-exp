@@ -1,8 +1,11 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
+import axios from "axios";
 import type { NextPage } from "next";
 import Link from "next/link";
+import { useEffect } from "react";
 import Cards from "../components/Cards/Cards";
 import Navbar from "../components/Navbar/Navbar";
+import http from "../services/axiosConfig/interceptors";
 
 const dummy_data = [
   {
@@ -29,8 +32,10 @@ const dummy_data = [
 ];
 
 const Home: NextPage = () => {
+
+
   return (
-    <main style={{ backgroundColor: "#ccc", width: "100vw", height: "100vh" }}>
+    <main>
       <Navbar />
       <Container maxWidth={"xl"}>
         <Typography variant="h6" component="div" sx={{ marginBottom: 2 }}>
@@ -47,16 +52,7 @@ const Home: NextPage = () => {
             </Grid>
           ))}
         </Grid>
-        {/* <Grid container spacing={2}>
-          <Grid item xs={4}>
-            <Cards
-              title="نمایندگی 114 سایپا"
-              description="نمایشگاه خودروی اقای اسماعیلی در تهران"
-              time={2}
-              key={6}
-            />
-          </Grid>
-        </Grid> */}
+        <Link href='/test'>Go to test</Link>
       </Container>
     </main>
   );

@@ -18,8 +18,8 @@ export const logIn = createAsyncThunk(
     try {
       const url = config.endpoints.auth.login;
       const { data } = await http.post(url, { username, password });
+      localStorage.setItem("token", data.token);
       return data;
-      
     } catch (err: any) {
       return thunkAPI.rejectWithValue(err.response.data.message);
     }
